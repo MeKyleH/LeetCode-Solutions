@@ -1,41 +1,41 @@
 /**
-Two Number Sum
+Three Number Sum
 
-Write a function that takes in a non-empty array of distinct integers and aninteger representing a target sum. If any two numbers in the input array sum up to the target sum, the function should return them in an array, in any order. If no two numbers sum up to the target sum, the function should return an empty array.
+Write a function that takes in a non-empty array of distinct integers and an
+integer representing a target sum. The function should find all triplets in
+the array that sum up to the target sum and return a two-dimensional array of
+all these triplets. The numbers in each triplet should be ordered in ascending
+order, and the triplets themselves should be ordered in ascending order with
+respect to the numbers they hold.
+
+If no three numbers sum up to the target sum, the function should return an
+empty array.
+
+Example 1:
+array = [12, 3, 1, 2, -6, 5, -8, 6];
+targetSum = 0
+
+Output:
+[[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]];
 **/
 
-// O(n^2) Time and O(1) space
-function twoNumberSum(array, targetSum) {
-	// loop through sortedArray to check for targetSum
-	for (let i = 0; i < array.length; i++) {
-		// loop through remaining numbers for a match
-		for (let j = i + 1; j < array.length; j++) {
-			if (array[i] + array[j] === targetSum) {
-				return [array[i], array[j]];
+function threeNumberSum(array, targetSum) {
+  const sortedArray = array.sort(function(a, b){return a-b});
+	const solutions = [];
+
+	for (let i = 0; i < sortedArray.length; i++) {
+		const firstNum = sortedArray[i];
+		for (let j = i + 1; j < sortedArray.length; j++) {
+			const secondNum = sortedArray[j];
+			const neededNum = targetSum - firstNum - secondNum;
+			if (sortedArray.indexOf(neededNum, j) > j) {
+				solutions.push([firstNum, secondNum, neededNum]);
 			}
 		}
 	}
-	return [];
+
+	return solutions;
 }
 
-
-// O(n) Time and O(n) space
-function twoNumberSum2(array, targetSum) {
-  const usedNumbers = {};
-	// loop through array and check if the number exists in our usedNumbers
-	for (let i = 0; i < array.length; i++) {
-		const targetNumber = targetSum - array[i];
-		if (usedNumbers[targetNumber]) {
-			return [array[i], targetNumber];
-		}
-		usedNumbers[array[i]] = true;
-	}
-	return [];
-}
-
-
-const array = [3, 5, -4, 8, 11, 1, -1, 6];
-const targetSum = 10;
-
-console.log(twoNumberSum(array, targetSum));
-console.log(twoNumberSum2(array, targetSum));
+// Do not edit the line below.
+exports.threeNumberSum = threeNumberSum;
