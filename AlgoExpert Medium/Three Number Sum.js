@@ -20,7 +20,7 @@ Output:
 **/
 
 function threeNumberSum(array, targetSum) {
-  const sortedArray = array.sort(function(a, b){return a-b});
+  const sortedArray = array.sort(function(a, b) { return a - b });
 	const solutions = [];
 
 	for (let i = 0; i < sortedArray.length; i++) {
