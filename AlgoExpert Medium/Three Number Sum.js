@@ -19,6 +19,7 @@ Output:
 [[-8, 2, 6], [-8, 3, 5], [-6, 1, 5]];
 **/
 
+// O(n) Time. O(1) Space
 function threeNumberSum(array, targetSum) {
   const sortedArray = array.sort(function(a, b) { return a - b });
 	const solutions = [];
