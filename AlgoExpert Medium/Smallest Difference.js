@@ -18,6 +18,7 @@ Output:
 [28, 26];
 **/
 
+// Time = O(N * M) Space = O(1)
 function smallestDifference(arrayOne, arrayTwo) {
   let currentPair = [];
 	let currentDiff = Infinity;
@@ -34,5 +35,33 @@ function smallestDifference(arrayOne, arrayTwo) {
 	return currentPair;
 }
 
+// Time = O(Nlog(n) + Mlog(m)) Space = O(1)
+function smallestDifference2(arrayOne, arrayTwo) {
+	const sorted1 = arrayOne.sort(function(a, b) { return a - b });
+	const sorted2 = arrayTwo.sort(function(a, b) { return a - b });
+
+	let currentPair = [];
+	let currentDiff = Infinity;
+	let index1 = 0;
+	let index2 = 0;
+
+	while (index1 < arrayOne.length && index2 < arrayTwo.length) {
+		const thisDiff = Math.abs(sorted1[index1] - sorted2[index2]);
+		if (thisDiff < currentDiff) {
+			currentDiff = thisDiff;
+			currentPair = [sorted1[index1], sorted2[index2]];
+		}
+		if (thisDiff === 0) {
+			break;
+		}
+		if (sorted1[index1] < sorted2[index2]) {
+			index1++;
+		} else {
+			index2++;
+		}
+	}
+	return currentPair;
+}
+
 // Do not edit the line below.
-exports.smallestDifference = smallestDifference;
+exports.smallestDifference2 = smallestDifference;
