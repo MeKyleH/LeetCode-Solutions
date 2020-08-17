@@ -18,7 +18,7 @@ Output:
 3
 **/
 
-// O(n) Time and O(1) Space
+// O(log(n)) Time and O(1) Space
 function binarySearch(array, target) {
 	let leftIndex = 0;
 	let rightIndex = array.length - 1;
@@ -47,6 +47,28 @@ function binarySearch(array, target) {
 		if (middleIndex === rightIndex || middleIndex === leftIndex) {
 			break;
 		}
+	}
+	return -1;
+}
+
+function binarySearch2(array, target) {
+	let leftIndex = 0;
+	let rightIndex = array.length - 1;
+	let middleIndex = setMiddleIndex(leftIndex, rightIndex)
+
+  // while the left index is less than the right keep updating the numbers
+	while (leftIndex <= rightIndex) {
+		// check for the new number
+		if (array[middleIndex] === target) {
+			return middleIndex;
+		}
+
+		if (array[middleIndex] < target) {
+			leftIndex = middleIndex + 1;
+		} else {
+			rightIndex = middleIndex - 1;
+		}
+		middleIndex = setMiddleIndex(leftIndex, rightIndex);
 	}
 	return -1;
 }
